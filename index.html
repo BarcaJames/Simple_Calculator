@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        h3 {
+            text-align: center;
+            color: black;
+        }
+
+        input[name="inputScreen"] {
+            background-color: rgb(214, 171, 171);
+            height: 30px;
+            text-align: right;
+            font-size: 25px;
+        }
+
+        input[type="button"] {
+            height: 50px;
+            background-color: #161313;
+            font-size: 25px;
+        }
+
+        input[type="button"]:hover {
+            background-color: yellow;
+        }
+
+        div {
+            margin: 0 auto;
+            width: 256px;
+        }
+
+        .grid-item {
+            font-size: 30px;
+            color: white;
+            text-align: center;
+            border-radius: 50% 20% / 10% 40%;
+        }
+
+        .grid-container {
+            border: 1px solid blue;
+            display: grid;
+            grid-template-columns: 55px 55px 55px 55px;
+            grid-gap: 5px;
+            padding: 10px;
+            justify-content: center;
+            background-color: navy;
+            border-radius: 15px;
+        }
+
+        .grid-item-clear {
+            grid-column: 3 / span 2;
+            font-size: 30px;
+            text-align: center;
+            border-radius: 50% 20% / 10% 40%;
+            color: white;
+        }
+
+        .grid-item-backspace {
+            grid-column: 1 / span 2;
+            font-size: 30px;
+            text-align: center;
+            border-radius: 50% 20% / 10% 40%;
+            color: white;
+
+        }
+
+        .grid-item-textField {
+            grid-column: 1 / span 4;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h3>SIMPLE CALCULATOR</h4>
+            <form autocomplete="off" name="calForm">
+                <div class="grid-container">
+                    <input class="grid-item-textField" type="text" name="inputScreen" disabled>
+                    <input type="button" class="grid-item" name="btnSeven" value="7" onclick="display(btnSeven.value)">
+                    <input type="button" class="grid-item" name="btnEight" value="8" onclick="display(btnEight.value)">
+                    <input type="button" class="grid-item" name="btnNine" value="9" onclick="display(btnNine.value)">
+                    <input type="button" class="grid-item" name="btnMulti" value="*" onclick="display(btnMulti.value)">
+                    <input type="button" class="grid-item" name="btnFour" value="4" onclick="display(btnFour.value)">
+                    <input type="button" class="grid-item" name="btnFive" value="5" onclick="display(btnFive.value)">
+                    <input type="button" class="grid-item" name="btnSix" value="6" onclick="display(btnSix.value)">
+                    <input type="button" class="grid-item" name="btnDiv" value="/" onclick="display(btnDiv.value)">
+                    <input type="button" class="grid-item" name="btnOne" value="1" onclick="display(btnOne.value)">
+                    <input type="button" class="grid-item" name="btnTwo" value="2" onclick="display(btnTwo.value)">
+                    <input type="button" class="grid-item" name="btnThree" value="3" onclick="display(btnThree.value)">
+                    <input type="button" class="grid-item" name="btnMinus" value="-" onclick="display(btnMinus.value)">
+                    <input type="button" class="grid-item" name="btnZero" value="0" onclick="display(btnZero.value)">
+                    <input type="button" class="grid-item" name="btnPoint" value="." onclick="display(btnPoint.value)">
+                    <input type="button" class="grid-item" name="btnEqual" value="=" onclick="Equal()">
+                    <input type="button" class="grid-item" name="btnPlus" value="+" onclick="display(btnPlus.value)">
+                    <input type="button" class="grid-item-backspace" name="btnBkSpace" value="BK" onclick="BackSpace()">
+                    <input type="button" class="grid-item-clear" name="btnClr" value="CE" onclick="ClearScreen()">
+                </div>
+            </form>
+    </div>
+
+    <script>
+
+        window.onkeydown = (value) => {
+            // let reg = /[0-9]|[*-+/.-]/
+            // console.log(value.key)
+            if (value.key === '=' || value.key === 'Enter') {
+                Equal()
+            }
+
+            if (value.key === 'Backspace') {
+                BackSpace()
+            }
+
+            if (value.key === 'Escape') {
+                ClearScreen()
+            }
+
+            if (acceptedValue(value.key)) {
+                display(value.key)
+            }
+        }
+
+
+        function acceptedValue(value) {
+            let reg = /[0-9]|[*+/.-]/
+            return (reg.test(value))
+        }
+
+        function ClearScreen() {
+            calForm.inputScreen.value = " ";
+        }
+
+        function BackSpace() {
+            var userValue = calForm.inputScreen.value;
+            var len = userValue.length;
+            if (len > 0) {
+                var userValue = calForm.inputScreen.value;
+                userValue = userValue.substr(0, len - 1)
+                calForm.inputScreen.value = userValue
+            }
+
+        }
+
+        function display(q1) {
+            if (acceptedValue(q1)) {
+                calForm.inputScreen.value = calForm.inputScreen.value + q1;
+            }
+        }
+
+        function Equal() {
+            calForm.inputScreen.value = eval(calForm.inputScreen.value);
+        } 
+    </script>
+</body>
+
+</html>
