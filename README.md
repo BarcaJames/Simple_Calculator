@@ -10,3 +10,6 @@
   <li> Remove last added value with backspace button </li>
 </ul>
 
+## Screen shot
+
+![Calculator](https://user-images.githubusercontent.com/49459617/73775135-56a91280-4753-11ea-9ba2-e7059502d254.png)
